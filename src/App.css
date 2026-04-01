@@ -1,38 +1,158 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --maroon: #6b1f2a;
+  --maroon-light: #8b2635;
+  --maroon-dark: #4a1520;
+  --white: #ffffff;
+  --off-white: #f7f7f7;
+  --grey-light: #ebebeb;
+  --grey-mid: #888888;
+  --grey-dark: #333333;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--white);
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 60px 20px;
+  background: var(--white);
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+}
+
+.header {
+  margin-bottom: 32px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.header h1 {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--maroon-dark);
+  letter-spacing: -0.3px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subtitle {
+  font-size: 0.88rem;
+  color: var(--grey-mid);
+  margin-top: 4px;
+  font-weight: 600;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.form {
   display: flex;
   flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.form input {
+  padding: 13px 16px;
+  border: 1.5px solid var(--grey-light);
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  color: var(--grey-dark);
+  outline: none;
+  transition: border-color 0.2s;
+  background: var(--off-white);
+  width: 100%;
+}
+
+.form input:focus {
+  border-color: var(--maroon);
+  background: var(--white);
+}
+
+.form button {
+  padding: 13px;
+  background: var(--maroon);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.form button:hover {
+  background: var(--maroon-light);
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--grey-mid);
+  font-size: 0.88rem;
+  padding: 16px 0;
+}
+
+.note-item {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  background: var(--off-white);
+  border-radius: 12px;
+  padding: 14px 16px;
+  border-left: 4px solid var(--maroon);
 }
 
-.App-link {
-  color: #61dafb;
+.note-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.note-title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--maroon-dark);
+}
+
+.note-text {
+  font-size: 0.88rem;
+  color: var(--grey-mid);
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: var(--grey-mid);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  background: var(--maroon);
+  color: var(--white);
 }
