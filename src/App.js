@@ -4,72 +4,85 @@ import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore"
 import "./App.css";
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [note, setNote] = useState("");
-  const [notes, setNotes] = useState([]);
-  const notesCollection = collection(db, "notes");
+  const [name, setName] = useState("");
+  const [course, setCourse] = useState("");
+  const [yearLevel, setYearLevel] = useState("");
+  const [records, setRecords] = useState([]);
+  const recordsCollection = collection(db, "students");
 
-  const addNote = async () => {
-    if (note.trim() === "" || title.trim() === "") return;
-    await addDoc(notesCollection, {
-      title: title,
-      text: note,
+  const addRecord = async () => {
+    if (name.trim() === "" || course.trim() === "" || yearLevel === "") return;
+    await addDoc(recordsCollection, {
+      name: name,
+      course: course,
+      yearLevel: yearLevel,
       createdAt: new Date()
     });
-    setTitle("");
-    setNote("");
-    fetchNotes();
+    setName("");
+    setCourse("");
+    setYearLevel("");
+    fetchRecords();
   };
 
-  const fetchNotes = async () => {
-    const data = await getDocs(notesCollection);
-    setNotes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  const fetchRecords = async () => {
+    const data = await getDocs(recordsCollection);
+    setRecords(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  const deleteNote = async (id) => {
-    const noteDoc = doc(db, "notes", id);
-    await deleteDoc(noteDoc);
-    fetchNotes();
+  const deleteRecord = async (id) => {
+    const recordDoc = doc(db, "students", id);
+    await deleteDoc(recordDoc);
+    fetchRecords();
   };
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
-useEffect(() => { fetchNotes(); }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { fetchRecords(); }, []);
 
   return (
     <div className="page">
       <div className="card">
         <div className="header">
           <h1>WARD React App</h1>
-          <p className="subtitle">Frontend & Backend Demo</p>
+          <p className="subtitle">Student Record Form</p>
         </div>
 
         <div className="form">
           <input
             type="text"
-            placeholder="Note title..."
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Full Name..."
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Write your note..."
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
+            placeholder="Course..."
+            value={course}
+            onChange={(e) => setCourse(e.target.value)}
           />
-          <button onClick={addNote}>Add Note</button>
+          <select
+            value={yearLevel}
+            onChange={(e) => setYearLevel(e.target.value)}
+          >
+            <option value="">Select Year Level...</option>
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+          </select>
+          <button onClick={addRecord}>Save Record</button>
         </div>
 
         <div className="notes-list">
-          {notes.length === 0 && (
-            <p className="empty">No notes yet. Add one above.</p>
+          {records.length === 0 && (
+            <p className="empty">No records yet. Add one above.</p>
           )}
-          {notes.map((n) => (
-            <div className="note-item" key={n.id}>
+          {records.map((r) => (
+            <div className="note-item" key={r.id}>
               <div className="note-content">
-                <span className="note-title">{n.title}</span>
-                <span className="note-text">{n.text}</span>
+                <span className="note-title">{r.name}</span>
+                <span className="note-text">{r.course} — {r.yearLevel}</span>
               </div>
-              <button className="delete-btn" onClick={() => deleteNote(n.id)}>✕</button>
+              <button className="delete-btn" onClick={() => deleteRecord(r.id)}>✕</button>
             </div>
           ))}
         </div>

@@ -156,3 +156,20 @@ body {
   background: var(--maroon);
   color: var(--white);
 }
+.form select {
+  padding: 13px 16px;
+  border: 1.5px solid var(--grey-light);
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  color: var(--grey-dark);
+  outline: none;
+  background: var(--off-white);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.form select:focus {
+  border-color: var(--maroon);
+  background: var(--white);
+}
