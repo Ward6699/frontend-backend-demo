@@ -12,10 +12,3 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-```
-
-**STEP 3: Create a `.gitignore` file**
-
-Check if `.gitignore` already exists in your project root. Open it and make sure this line is there:
-```
-.env
